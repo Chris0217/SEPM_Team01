@@ -2001,3 +2001,5 @@
 20230518	18:42:26	a67a8521-9988-4d96-8758-74fca522f54e	GET	undefined	/api/allingredients
 20230518	18:42:58	6ee40e33-6e5e-4765-8216-abf7fa4786b1	GET	undefined	/api/getallingredients
 >>>>>>> 469745426c10c7f80de8c43e5f9905c41fa4af1c
+20230520	14:19:27	980637cf-ba42-4e7f-b736-91b230540170	GET	undefined	/api/allIngredients
+20230520	14:19:27	2e7c4067-ade3-465a-b4ce-1606d3163ce0	GET	undefined	/favicon.ico
