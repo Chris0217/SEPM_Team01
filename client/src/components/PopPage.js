@@ -26,7 +26,24 @@ function PopPage() {
 
   //submit 이전에는 꼭 meal type 중 1개는 선탁해야 submit 가능
   //submit 이후에 콘솔로 선택한 value 리턴하고 메뉴 출력함
+
+  //체크박스 체크되었는지 확인하는 function
+  function handleCheckboxChange(event) {
+    const { id } = event.target;
+    setCheckedState((prevState) => {
+      const newState = prevState.map((item) => {
+        if (item.id === Number(id)) {
+          return { ...item, isChecked: !item.isChecked };
+        }
+        return item;
+      });
+      return newState;
+    });
+  }
+  const [countRe, setCountRe] = useState(0);
   const handleSubmit = async (event) => {
+    flushCache();
+    setCountRe(countRe + 1);
     event.preventDefault();
     if (
       checkedState.filter(
@@ -55,20 +72,6 @@ function PopPage() {
     setSelectedValues(selectedValues);
     setShowDiv(true);
   };
-  const [countRe, setCountRe] = useState(0);
-  //체크박스 체크되었는지 확인하는 function
-  function handleCheckboxChange(event) {
-    const { id } = event.target;
-    setCheckedState((prevState) => {
-      const newState = prevState.map((item) => {
-        if (item.id === Number(id)) {
-          return { ...item, isChecked: !item.isChecked };
-        }
-        return item;
-      });
-      return newState;
-    });
-  }
 
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   function handleReRecommend(event) {

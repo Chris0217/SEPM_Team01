@@ -262,7 +262,7 @@ function MyPage() {
           <div class="condition">
             <h2>Condition</h2>
             <label for="allergen">Allergens</label>
-            {unpIngredients.length == 0 ? (
+            {allergen == null || allergen.length == 0 ? (
               <input
                 class="loopInput"
                 type="text"
@@ -298,7 +298,7 @@ function MyPage() {
               false
             )}
             <label for="unpreferred">Unpreferred Ingredients</label>
-            {unpIngredients.length == 0 ? (
+            {unpIngredients == null || unpIngredients.length == 0 ? (
               <input
                 class="loopInput"
                 type="text"

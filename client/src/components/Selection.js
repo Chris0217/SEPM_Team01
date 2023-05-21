@@ -22,7 +22,12 @@ function Selection(props) {
     };
     const getUserInfo = async () => {
       const response = await axios.get("http://localhost:3500/userinfo");
-      setUserinfos(response.data);
+      const userData = response.data;
+      if (userData) {
+        setUserinfos(userData);
+      } else {
+        getUserInfo();
+      }
     };
 
     getProducts();
@@ -32,9 +37,6 @@ function Selection(props) {
   //this will be fetched from other js file and database on future*/
   const userMealType = props.type;
   const userMealStyle = props.style;
-  console.log(userMealType);
-  console.log(userMealStyle);
-  //const userUnPreffer = ["Salmon", "beef", "seeds"];
 
   const userHeight = userinfos.map((userinfos) => userinfos.height);
   const userWeight = userinfos.map((userinfos) => userinfos.weight);
@@ -43,7 +45,6 @@ function Selection(props) {
   const userUnPreffer = userinfos.map(
     (userinfos) => userinfos.unpreferred_ingredients
   );
-  console.log(userUnPreffer);
   const userAllergen = userinfos.map((userinfos) => userinfos.allergen);
 
   const userBMR = 10 * userWeight + 6.25 * userHeight - 5 * userAge;
@@ -214,7 +215,6 @@ function Selection(props) {
     fixedFatVal,
   ];
   window.mealPlanInfo = mealPlanInfo;
-  console.log(mealArray);
 
   return (
     <>

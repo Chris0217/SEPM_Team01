@@ -1,8 +1,8 @@
 const db = require("../module/db");
 
 // This function fetches a random label from the database
-const handleHistory = async (req, res) => {
-  console.log("historyController executed!");
+const handleUserHistory = async (req, res) => {
+  console.log("historyController executed!", req.originalUrl);
 
   // define the SQL query to fetch a random label
   const query = "SELECT * FROM meals;"; // display random label
@@ -16,4 +16,4 @@ const handleHistory = async (req, res) => {
   });
 };
 
-module.exports = { handleHistory };
+module.exports = { handleUserHistory };

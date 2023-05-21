@@ -3,7 +3,7 @@ const sessionUtil = require("./sessionUtil");
 
 // This function fetches a random label from the database
 const handleUserInput = async (req, res) => {
-  console.log("historyController executed!");
+  console.log("userInputController executed!");
   const cachedUsername = sessionUtil.getUsernameFromSession(req);
   if (cachedUsername) {
     console.log("현재 로그인한 사용자:", cachedUsername);
