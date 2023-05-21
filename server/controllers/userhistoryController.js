@@ -1,11 +1,13 @@
 const db = require("../module/db");
+const sessionUtil = require("./sessionUtil");
 
 // This function fetches a random label from the database
 const handleUserHistory = async (req, res) => {
   console.log("historyController executed!", req.originalUrl);
+  const cachedUsername = sessionUtil.getUsernameFromSession(req);
 
   // define the SQL query to fetch a random label
-  const query = "SELECT * FROM meals;"; // display random label
+  const query = "SELECT * FROM meals WHERE user = '" + cachedUsername + "';";
 
   // execute the query using the db object and handle the results
   db.query(query, function (err, data) {

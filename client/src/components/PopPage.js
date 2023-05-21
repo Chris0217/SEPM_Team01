@@ -4,7 +4,6 @@ import "./Dashboard.css";
 import axios from "axios";
 import Selection from "./Selection";
 import { flushCache } from "./Memoization";
-const POPUP_URL = "/home";
 function PopPage() {
   //우선 마지막 3-4개가 Meal Type, 나머지는 Meal Style
   const [checkedState, setCheckedState] = useState([
@@ -109,6 +108,7 @@ function PopPage() {
     event.preventDefault();
     try {
       window.location.href = "http://localhost:3000/home";
+      //window.location.href = "http://13.215.209.159:3000/home";
       const responseInput = await axios.post(
         "http://localhost:3500/home",
         { mealUserArray, mealPlanInfo },

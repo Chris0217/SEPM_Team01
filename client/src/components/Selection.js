@@ -215,6 +215,8 @@ function Selection(props) {
     fixedFatVal,
   ];
   window.mealPlanInfo = mealPlanInfo;
+  console.log(mealArray);
+  console.log(mealPlanInfo);
 
   return (
     <>
