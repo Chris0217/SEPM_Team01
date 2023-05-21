@@ -2267,3 +2267,12 @@
 20230521	23:13:04	205ba669-0ea9-4f63-850c-4ab064e4f218	GET	http://localhost:3000	/userhistory
 20230521	23:13:04	3a7ff1e9-85a5-4a8e-9ff0-2aaeb09a06de	GET	http://localhost:3000	/userhistory
 20230521	23:13:04	82d09a8b-bf91-4d4f-b6bf-294d17b72cfe	GET	http://localhost:3000	/userhistory
+20230521	23:22:05	04cfacb9-6ff1-4e7e-ac71-20956f38b60a	GET	http://localhost:3000	/userhistory
+20230521	23:22:08	9301b251-8a2a-4c33-9264-0da5e20b481a	GET	http://localhost:3000	/api
+20230521	23:22:08	b94f5869-6e65-46c3-8df7-9a4b4db06e59	GET	http://localhost:3000	/userinfo
+20230521	23:22:11	c2116d98-c83d-4268-b182-f9e90ecb4198	OPTIONS	http://localhost:3000	/home
+20230521	23:22:11	23a2c8f2-9281-47e7-bf84-e0906039125e	GET	http://localhost:3000	/userhistory
+20230521	23:22:11	f8cb8eb3-6daf-44c7-879f-dee6edbd06e7	GET	http://localhost:3000	/userhistory
+20230521	23:22:11	3797352d-0b54-495f-a4e6-0578c6ec5e1c	GET	http://localhost:3000	/userhistory
+20230521	23:22:11	1a51c5de-7685-4ab6-8e91-7852d0f03c43	GET	http://localhost:3000	/userhistory
+20230521	23:22:11	56e0b0bd-5195-469f-95f6-cacb74245394	GET	http://localhost:3000	/userhistory
