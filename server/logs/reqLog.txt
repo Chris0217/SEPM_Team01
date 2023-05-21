@@ -2585,3 +2585,16 @@
 20230521	21:31:01	544ef9c9-8fd4-4597-8599-4c2503df59ff	OPTIONS	http://localhost:3000	/register
 20230521	21:31:30	5cd59cc4-cc6b-4d6a-b1d9-aff93dd4d1d5	OPTIONS	http://localhost:3000	/register
 20230521	21:31:30	bb6ed194-5926-45d7-9813-0a677a1e26a8	POST	http://localhost:3000	/register
+20230521	21:35:08	8e258c88-0f2a-4b93-adea-d5a015e18085	GET	http://localhost:3000	/userhistory
+20230521	21:35:08	f8814adf-707c-42c7-b227-86c3c544edbb	GET	http://localhost:3000	/userhistory
+20230521	21:35:08	80c171af-bc8d-4ccb-9efe-0ea4b237c290	GET	http://localhost:3000	/userhistory
+20230521	21:35:08	dd5b315d-9a10-4f0e-9472-1663b4b227bc	GET	http://localhost:3000	/userhistory
+20230521	21:35:08	ebca9528-fecb-43fc-b8b5-81afb712240b	GET	http://localhost:3000	/userhistory
+20230521	21:35:21	cc676304-1d85-46c6-bd94-7a3891067b0e	OPTIONS	http://localhost:3000	/login
+20230521	21:35:21	2acd3eed-714c-4880-9017-889a039e212f	POST	http://localhost:3000	/login
+20230521	21:35:21	b4b9da5e-8bc8-44f2-a608-0defe4c0d6db	OPTIONS	http://localhost:3000	/
+20230521	21:35:21	e4229d95-ee7a-40ab-ae1f-06aa92d367b6	GET	http://localhost:3000	/
+20230521	21:35:22	4649c479-3641-4fe0-82a7-5e544aeaccd4	GET	http://localhost:3000	/userhistory
+20230521	21:35:23	805cf3cb-2311-4317-a413-674b3274f8c5	GET	http://localhost:3000	/userhistory
+20230521	21:35:26	74f9005a-cc4e-4784-9b37-126bc670d101	GET	http://localhost:3000	/api
+20230521	21:35:26	7e836256-5296-481f-b1ac-33a328293a26	GET	http://localhost:3000	/userinfo
