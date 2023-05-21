@@ -94,8 +94,8 @@ function MyPage() {
         setWeight(userData[0].weight);
         setAllergen(JSON.parse(userData[0].allergen));
         setUnpIngredients(JSON.parse(userData[0].unpreferred_ingredients));
-        setSelectedAllergens((allergen.map(allergy => ({value:allergy, label:allergy}))));
-        setSelectedIngredients((unpIngredients.map(ingredient => ({value:ingredient, label:ingredient}))));
+        setSelectedAllergens((JSON.parse(userData[0].allergen).map(allergy => ({value:allergy, label:allergy}))));
+        setSelectedIngredients((JSON.parse(userData[0].unpreferred_ingredients).map(ingredient => ({value:ingredient, label:ingredient}))));
       } else {
         setEditMode(true)
       }

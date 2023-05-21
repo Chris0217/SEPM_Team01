@@ -4332,3 +4332,16 @@
 20230521	19:47:04	1351cd1c-79a5-4a6f-8a67-a822f097e3f4	GET	http://localhost:3000	/api/allIngredients
 20230521	19:47:04	cb7fb4e2-d347-4b29-9d02-39b05760b78e	GET	http://localhost:3000	/mypage
 20230521	19:47:04	360106a1-027b-4b84-be4d-ce3fcba8cd0a	GET	http://localhost:3000	/login
+20230521	22:14:28	a698f1d7-8e8c-4800-9c13-b4bad9ed6d40	GET	http://localhost:3000	/api/allIngredients
+20230521	22:14:28	f3e43514-7513-4adc-83d8-a0f5ce9652ee	GET	http://localhost:3000	/mypage
+20230521	22:14:28	1fbf7e83-a8f3-44ab-b83a-f2777dc77700	GET	http://localhost:3000	/login
+20230521	22:15:27	997f329b-10ae-4f5b-b52e-6c7d8f545475	OPTIONS	http://localhost:3000	/login
+20230521	22:15:27	f7d7c277-e84a-4a96-94cf-142d08714538	POST	http://localhost:3000	/login
+20230521	22:15:27	43d4667d-8060-46ae-b0a6-ba08841e3cde	OPTIONS	http://localhost:3000	/
+20230521	22:15:27	5b4dffe7-00da-4233-bd77-8e65f8d6c0bc	GET	http://localhost:3000	/
+20230521	22:15:33	97bcdf31-9521-4158-98b5-a5afeb99f694	GET	http://localhost:3000	/api/allIngredients
+20230521	22:15:33	c7691e19-8c81-4536-984b-40368d8a6274	GET	http://localhost:3000	/mypage
+20230521	22:15:52	52d0383b-1a84-42e0-a125-15b38737d9f9	GET	http://localhost:3000	/api/allIngredients
+20230521	22:15:52	dc68731a-59bd-4784-92ef-bea792202cae	GET	http://localhost:3000	/mypage
+20230521	22:16:00	b4740dda-f530-4e48-9cf4-a1255caa79b6	GET	http://localhost:3000	/api/allIngredients
+20230521	22:16:00	6969819e-d75a-4bb0-a173-86d4fbc60bb2	GET	http://localhost:3000	/mypage
