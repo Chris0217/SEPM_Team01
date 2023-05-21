@@ -7,6 +7,7 @@ export const getMealResult = (
   userMealStyle,
   products,
   userUnPreffer,
+  userAllergen,
   totalCal
 ) => {
   if (!cachedResult) {
@@ -16,6 +17,7 @@ export const getMealResult = (
       userMealStyle,
       products,
       userUnPreffer,
+      userAllergen,
       totalCal
     );
   }
