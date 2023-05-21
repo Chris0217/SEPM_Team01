@@ -12,6 +12,7 @@ function Selection(props) {
   //products to store database information, loading for useEffect rendering
 
   const [products, setProducts] = useState([]);
+  const [userinfos, setUserinfos] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getProducts = async () => {
@@ -19,8 +20,13 @@ function Selection(props) {
       setProducts(response.data);
       setLoading(false);
     };
+    const getUserInfo = async () => {
+      const response = await axios.get("http://localhost:3500/userinfo");
+      setUserinfos(response.data);
+    };
 
     getProducts();
+    getUserInfo();
   }, []);
 
   //this will be fetched from other js file and database on future*/
@@ -28,9 +34,28 @@ function Selection(props) {
   const userMealStyle = props.style;
   console.log(userMealType);
   console.log(userMealStyle);
-  const userUnPreffer = ["Salmon", "beef", "seeds"];
+  //const userUnPreffer = ["Salmon", "beef", "seeds"];
 
-  const totalCal = 2000;
+  const userHeight = userinfos.map((userinfos) => userinfos.height);
+  const userWeight = userinfos.map((userinfos) => userinfos.weight);
+  const userSex = userinfos.map((userinfos) => userinfos.sex);
+  const userAge = userinfos.map((userinfos) => userinfos.age);
+  const userUnPreffer = userinfos.map(
+    (userinfos) => userinfos.unpreferred_ingredients
+  );
+  console.log(userUnPreffer);
+  const userAllergen = userinfos.map((userinfos) => userinfos.allergen);
+
+  const userBMR = 10 * userWeight + 6.25 * userHeight - 5 * userAge;
+  let userAMR = 100;
+  if (userSex.includes("m")) {
+    userAMR = userBMR * 1.55;
+  } else {
+    userAMR = userBMR * 1.375;
+  }
+
+  const totalCal = Math.round(userAMR);
+  console.log(totalCal);
   const carbTotal = Math.round(((totalCal / 100) * 50) / 4);
   const proteinTotal = Math.round(((totalCal / 100) * 15) / 4);
   const fatTotal = Math.round(((totalCal / 100) * 35) / 9);
@@ -42,6 +67,7 @@ function Selection(props) {
       userMealStyle,
       products,
       userUnPreffer,
+      userAllergen,
       totalCal
     );
   }

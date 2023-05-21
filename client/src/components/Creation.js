@@ -1,8 +1,9 @@
-export function Creation(type, style, productsList, unin, cal) {
+export function Creation(type, style, productsList, unin, allergen, cal) {
   const userMealType = type;
   const userMealStyle = style;
   const products = productsList;
   const userUnPreffer = unin;
+  const userAllergen = allergen;
   const totalCal = cal;
 
   const skipMeal = {
@@ -26,7 +27,8 @@ export function Creation(type, style, productsList, unin, cal) {
       product.calories < 2000 &&
       !userUnPreffer.some((unpreffered) =>
         product.ingredients.includes(unpreffered)
-      )
+      ) &&
+      !userAllergen.some((allergens) => product.ingredients.includes(allergens))
     );
   });
   //divided into each meal styles for uses
