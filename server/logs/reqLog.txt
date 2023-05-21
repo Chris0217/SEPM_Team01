@@ -2176,3 +2176,7 @@
 20230518	19:36:06	ba2bedb5-e749-4172-8952-2e5c8bc146ff	GET	undefined	/favicon.ico
 20230518	19:36:10	7c2bf404-c858-4114-acc6-a20c91ecc16a	GET	undefined	/api/allIngredients
 20230518	19:36:10	4a63065e-80d2-43cc-a8bd-35f8cd944fd9	GET	undefined	/favicon.ico
+20230521	20:14:03	e1472778-6b00-438f-b9b5-4e45aef94560	GET	http://localhost:3000	/history
+20230521	20:14:04	7f7e8ae8-865f-4ddd-ac8e-2a61534cc76e	GET	http://localhost:3000	/history
+20230521	20:14:08	8d5fec1f-4d46-4eae-bcb1-ff48f3cd22b5	GET	http://localhost:3000	/history
+20230521	20:14:08	17d54ef3-6028-411c-bde9-f500f3b2e0dd	GET	http://localhost:3000	/history
