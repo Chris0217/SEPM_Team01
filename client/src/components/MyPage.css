@@ -1,0 +1,100 @@
+.mypage_section {
+    width: 100%;
+    max-width: 93%;
+    min-height: 60%;
+    align-self: center;
+    background-color: rgb(255, 255, 255);
+}
+input {
+    height:42px;
+}
+.loopInput {
+    margin-bottom: 7px;
+    margin-top: 5px;
+    width: 85%;
+    align-self: center;
+}
+.dropdown-container {
+    color: black;
+    font-size: 22px;
+}
+
+.forms {
+    display: flex;
+    flex-direction: row;
+}
+.hw {
+    width: 60%;
+    margin: 10px 0px 0px 23px;
+    align-self:center;
+}
+.divBmi {
+    margin-left:9px;
+    width:34.5%;
+    align-self:center;
+    display: flex;
+}
+label {
+    margin-left: 3px;
+    margin-right: 10px;
+}
+.general,
+.condition {
+    margin:6px;
+    padding:10px;
+  display: flex;
+  flex-direction: column;
+}
+.next {
+    display: flex;
+    width: 100%;
+}
+.formInNext {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.divBmiImg {
+    width: 97%;
+    padding-top: 40px;
+}
+.bmi {
+    margin-left:16%;
+    width: 75%;
+    border-radius: 13px;
+}
+.userPic {
+    margin: 10px;
+    padding: 10px;
+    width: 35%;
+}
+.general {
+  background: rgb(190, 211, 241);
+  width: 60%;
+  height: auto;
+  padding-right: 25px;
+}
+
+.condition {
+  background: rgb(190, 211, 241);
+  /* flex */
+  flex-grow: 1;
+}
+
+input:read-only {
+    color:rgb(97, 102, 172);
+    font-weight:bold;
+    border:0;
+    background-color: rgb(255, 255, 255);
+}
+
+.buttons {
+    align-self: center;
+}
+button {
+    margin: 5px;
+    background-color: rgb(255, 255, 246);
+    border-color: rgb(251, 255, 207);
+    border-width: 0.15rem;
+}
