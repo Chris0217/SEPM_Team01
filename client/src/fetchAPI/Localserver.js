@@ -2,7 +2,6 @@ import express from "express";
 import mysql from "mysql";
 import axios from "axios";
 
-
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -28,7 +27,8 @@ app.get("/books", (req, res) => {
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
-  });1
+  });
+  1;
 });
 
 const getData = async () => {
@@ -52,7 +52,6 @@ const getData = async () => {
         return res.json("Data created successfully!");
       });
     }
-    
   });
 };
 getData();

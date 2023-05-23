@@ -12,51 +12,43 @@ function Selection(props) {
   //products to store database information, loading for useEffect rendering
 
   const [products, setProducts] = useState([]);
-  const [userinfos, setUserinfos] = useState([]);
+  //const [userinfos, setUserinfos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await axios.get("http://localhost:3500/api");
-      setProducts(response.data);
-      setLoading(false);
+    // Set the flag to true when the component is mounted
+    setMounted(true);
+
+    // Clean up the event listeners when the component is unmounted
+    return () => {
+      setMounted(false);
     };
-    const getUserInfo = async () => {
-      const response = await axios.get("http://localhost:3500/userinfo");
-      const userData = response.data;
-      if (userData) {
-        setUserinfos(userData);
-      } else {
-        getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch data only if the component is mounted
+      if (mounted) {
+        try {
+          const response = await axios.get("http://localhost:3500/api");
+          setProducts(response.data);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
 
-    getProducts();
-    getUserInfo();
-  }, []);
+    fetchData();
+  }, [mounted]);
 
   //this will be fetched from other js file and database on future*/
   const userMealType = props.type;
   const userMealStyle = props.style;
-
-  const userHeight = userinfos.map((userinfos) => userinfos.height);
-  const userWeight = userinfos.map((userinfos) => userinfos.weight);
-  const userSex = userinfos.map((userinfos) => userinfos.sex);
-  const userAge = userinfos.map((userinfos) => userinfos.age);
-  const userUnPreffer = userinfos.map(
-    (userinfos) => userinfos.unpreferred_ingredients
-  );
-  const userAllergen = userinfos.map((userinfos) => userinfos.allergen);
-
-  const userBMR = 10 * userWeight + 6.25 * userHeight - 5 * userAge;
-  let userAMR = 100;
-  if (userSex.includes("m")) {
-    userAMR = userBMR * 1.55;
-  } else {
-    userAMR = userBMR * 1.375;
-  }
-
-  const totalCal = Math.round(userAMR);
-  console.log(totalCal);
+  const totalCal = props.cal;
+  const userAllergen = props.allergen;
+  const userUnPreffer = props.unPreffer;
   const carbTotal = Math.round(((totalCal / 100) * 50) / 4);
   const proteinTotal = Math.round(((totalCal / 100) * 15) / 4);
   const fatTotal = Math.round(((totalCal / 100) * 35) / 9);
@@ -104,102 +96,140 @@ function Selection(props) {
   const [lunch, setLunch] = useState({});
   const [dinner, setDinner] = useState({});
   const [snack, setSnack] = useState({});
-  const fetchBreakfastImages = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${breakfastFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
-      );
-      const hits = response.data.hits;
-      if (hits.length > 0) {
-        const firstHit = hits[0]; // Get the first hit
-        const recipe = firstHit.recipe; // Extract the recipe object from the hit
-        if (recipe.image) {
-          setBreakfast(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
+  useEffect(() => {
+    const fetchBreakfastImages = async () => {
+      // Fetch breakfast images only if the component is mounted
+      if (mounted) {
+        try {
+          const response = await axios.get(
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${breakfastFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
+          );
+          const hits = response.data.hits;
+          if (hits.length > 0) {
+            const firstHit = hits[0];
+            const recipe = firstHit.recipe;
+            if (recipe.image) {
+              setBreakfast(recipe.image);
+            }
+          }
+        } catch (error) {
+          console.log(error);
         }
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
 
-  const fetchLunchImages = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${lunchFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
-      );
-      const hits = response.data.hits;
-      if (hits.length > 0) {
-        const firstHit = hits[0]; // Get the first hit
-        const recipe = firstHit.recipe; // Extract the recipe object from the hit
-        if (recipe.image) {
-          setLunch(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const fetchDinnerImages = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${dinnerFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
-      );
-      const hits = response.data.hits;
-      if (hits.length > 0) {
-        const firstHit = hits[0]; // Get the first hit
-        const recipe = firstHit.recipe; // Extract the recipe object from the hit
-        if (recipe.image) {
-          setDinner(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const fetchSnackImages = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${snackFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
-      );
-      const hits = response.data.hits;
-      if (hits.length > 0) {
-        const firstHit = hits[0]; // Get the first hit
-        const recipe = firstHit.recipe; // Extract the recipe object from the hit
-        if (recipe.image) {
-          setSnack(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    // Call the fetchBreakfastImages function
+    fetchBreakfastImages();
+  }, [mounted, fixedBreakfastProduct.label]);
 
   useEffect(() => {
-    fetchBreakfastImages();
+    const fetchLunchImages = async () => {
+      if (mounted) {
+        try {
+          const response = await axios.get(
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${lunchFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
+          );
+          const hits = response.data.hits;
+          if (hits.length > 0) {
+            const firstHit = hits[0]; // Get the first hit
+            const recipe = firstHit.recipe; // Extract the recipe object from the hit
+            if (recipe.image) {
+              setLunch(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
     fetchLunchImages();
+  }, [mounted, fixedLunchProduct.label]);
+
+  useEffect(() => {
+    const fetchDinnerImages = async () => {
+      if (mounted) {
+        try {
+          const response = await axios.get(
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${dinnerFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
+          );
+          const hits = response.data.hits;
+          if (hits.length > 0) {
+            const firstHit = hits[0]; // Get the first hit
+            const recipe = firstHit.recipe; // Extract the recipe object from the hit
+            if (recipe.image) {
+              setDinner(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
     fetchDinnerImages();
+  }, [mounted, fixedDinnerProduct.label]);
+
+  useEffect(() => {
+    const fetchSnackImages = async () => {
+      if (mounted) {
+        try {
+          const response = await axios.get(
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${snackFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
+          );
+          const hits = response.data.hits;
+          if (hits.length > 0) {
+            const firstHit = hits[0]; // Get the first hit
+            const recipe = firstHit.recipe; // Extract the recipe object from the hit
+            if (recipe.image) {
+              setSnack(recipe.image); // Update the recipe state variable with the recipe object from the first hit, if it has an image
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
     fetchSnackImages();
-  }, [mealResult]);
+  }, [mounted, fixedSnackProduct.label]);
 
   //make objects based on selected meals by generator
   //image will be fetched with function later
   const breakfastSelect = {
-    name: fixedBreakfastProduct ? fixedBreakfastProduct.label : "breakfast",
-    img: breakfast ? breakfast : "image",
+    name: fixedBreakfastProduct ? fixedBreakfastProduct.label : "skip",
+    img:
+      fixedBreakfastProduct && fixedBreakfastProduct.label === "Skipped"
+        ? process.env.PUBLIC_URL + "/x-mark.jpg"
+        : breakfast
+        ? breakfast
+        : "image",
   };
 
   const lunchSelect = {
-    name: fixedLunchProduct ? fixedLunchProduct.label : "lunch",
-    img: lunch ? lunch : "lunch",
+    name: fixedLunchProduct ? fixedLunchProduct.label : "skip",
+    img:
+      fixedLunchProduct && fixedLunchProduct.label === "Skipped"
+        ? process.env.PUBLIC_URL + "/x-mark.jpg"
+        : lunch
+        ? lunch
+        : "image",
   };
 
   const dinnerSelect = {
-    name: fixedDinnerProduct ? fixedDinnerProduct.label : "dinner",
-    img: dinner ? dinner : "dinner",
+    name: fixedDinnerProduct ? fixedDinnerProduct.label : "skip",
+    img:
+      fixedDinnerProduct && fixedDinnerProduct.label === "Skipped"
+        ? process.env.PUBLIC_URL + "/x-mark.jpg"
+        : dinner
+        ? dinner
+        : "image",
   };
   const snackSelect = {
-    name: fixedSnackProduct ? fixedSnackProduct.label : "snack",
-    img: snack ? snack : "snack",
+    name: fixedSnackProduct ? fixedSnackProduct.label : "skip",
+    img:
+      fixedSnackProduct && fixedSnackProduct.label === "Skipped"
+        ? process.env.PUBLIC_URL + "/x-mark.jpg"
+        : snack
+        ? snack
+        : "image",
   };
 
   const mealArray = [breakfastSelect, lunchSelect, dinnerSelect, snackSelect];
@@ -217,6 +247,17 @@ function Selection(props) {
   window.mealPlanInfo = mealPlanInfo;
   console.log(mealArray);
   console.log(mealPlanInfo);
+  // Declare a global variable to track the render count
+  window.renderCount = (window.renderCount || 0) + 1;
+
+  // Log the render count to the console
+  console.log(`Render count: ${window.renderCount}`);
+  console.log(
+    breakfastSelect.name,
+    lunchSelect.name,
+    dinnerSelect.name,
+    snackSelect.name
+  );
 
   return (
     <>

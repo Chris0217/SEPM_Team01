@@ -119,6 +119,7 @@ const getAllIngredientsController = async (req, res) => {
       // loop through each row of data
       data.forEach((row) => {
         const ingredients = JSON.parse(row.ingredients); // convert ingredient to lowercase to avoid duplicates
+
         // loop through each ingredient in the array
         ingredients.forEach((ingredient) => {
           const lowerCaseIngredient = ingredient.toLowerCase(); // convert ingredient to lowercase to avoid duplicates

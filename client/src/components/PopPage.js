@@ -22,9 +22,41 @@ function PopPage() {
   const [selectedTypeValues, setSelectedTypeValues] = useState([]);
   const [selectedStyleValues, setSelectedStyleValues] = useState([]);
   const [showDiv, setShowDiv] = useState(false);
+  const [userinfos, setUserinfos] = useState([]);
 
-  //submit 이전에는 꼭 meal type 중 1개는 선탁해야 submit 가능
-  //submit 이후에 콘솔로 선택한 value 리턴하고 메뉴 출력함
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await axios.get("http://localhost:3500/userinfo");
+      console.log("User info loading!");
+      const userData = response.data;
+      if (userData) {
+        setUserinfos(userData);
+      } else {
+        getUserInfo();
+      }
+    };
+    getUserInfo();
+  }, []);
+
+  const userHeight = userinfos.map((userinfos) => userinfos.height);
+  const userWeight = userinfos.map((userinfos) => userinfos.weight);
+  const userSex = userinfos.map((userinfos) => userinfos.sex);
+  const userAge = userinfos.map((userinfos) => userinfos.age);
+  const userUnPreffer = userinfos.map(
+    (userinfos) => userinfos.unpreferred_ingredients
+  );
+  const userAllergen = userinfos.map((userinfos) => userinfos.allergen);
+
+  const userBMR = 10 * userWeight + 6.25 * userHeight - 5 * userAge;
+  let userAMR = 100;
+  if (userSex.includes("m")) {
+    userAMR = userBMR * 1.55;
+  } else {
+    userAMR = userBMR * 1.375;
+  }
+
+  const totalCal = Math.round(userAMR);
+  console.log(totalCal);
 
   //체크박스 체크되었는지 확인하는 function
   function handleCheckboxChange(event) {
@@ -95,7 +127,7 @@ function PopPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setButtonDisabled(false); // Enable the button after 3 seconds
-    }, 3000);
+    }, 7000);
 
     return () => clearTimeout(timer); // Clear the timer on component unmount or re-render
   }, [isButtonDisabled]);
@@ -180,6 +212,9 @@ function PopPage() {
                 <Selection
                   type={selectedTypeValues}
                   style={selectedStyleValues}
+                  cal={totalCal}
+                  allergen={userAllergen}
+                  unPreffer={userUnPreffer}
                 ></Selection>
                 <div className="popup-buttons">
                   <button
