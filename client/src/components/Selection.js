@@ -34,6 +34,7 @@ function Selection(props) {
           const response = await axios.get("http://localhost:3500/api");
           setProducts(response.data);
           setLoading(false);
+          console.log("Loading set to false");
         } catch (error) {
           console.log(error);
         }
@@ -63,6 +64,7 @@ function Selection(props) {
       userAllergen,
       totalCal
     );
+    console.log("Meal created!");
   }
 
   console.log(mealResult);
@@ -91,15 +93,21 @@ function Selection(props) {
     name: fixedSnackProduct ? fixedSnackProduct.label : "snack",
   };
 
+  const isBreakfastDataAvailable = Boolean(fixedBreakfastProduct);
+  const isLunchDataAvailable = Boolean(fixedLunchProduct);
+  const isDinnerDataAvailable = Boolean(fixedDinnerProduct);
+  const isSnackDataAvailable = Boolean(fixedSnackProduct);
+
   //fetch image from api
   const [breakfast, setBreakfast] = useState({});
   const [lunch, setLunch] = useState({});
   const [dinner, setDinner] = useState({});
   const [snack, setSnack] = useState({});
+  console.log("Breakfast going in API fetch: ", breakfastFirstSelect.name);
   useEffect(() => {
     const fetchBreakfastImages = async () => {
       // Fetch breakfast images only if the component is mounted
-      if (mounted) {
+      if (mounted && isBreakfastDataAvailable) {
         try {
           const response = await axios.get(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${breakfastFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
@@ -120,11 +128,11 @@ function Selection(props) {
 
     // Call the fetchBreakfastImages function
     fetchBreakfastImages();
-  }, [mounted, fixedBreakfastProduct.label]);
-
+  }, [mounted, breakfastFirstSelect.name]);
+  console.log("Lunch going in API fetch: ", lunchFirstSelect.name);
   useEffect(() => {
     const fetchLunchImages = async () => {
-      if (mounted) {
+      if (mounted && isLunchDataAvailable) {
         try {
           const response = await axios.get(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${lunchFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
@@ -143,11 +151,11 @@ function Selection(props) {
       }
     };
     fetchLunchImages();
-  }, [mounted, fixedLunchProduct.label]);
-
+  }, [mounted, lunchFirstSelect.name]);
+  console.log("Dinner going in API fetch: ", dinnerFirstSelect.name);
   useEffect(() => {
     const fetchDinnerImages = async () => {
-      if (mounted) {
+      if (mounted && isDinnerDataAvailable) {
         try {
           const response = await axios.get(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${dinnerFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
@@ -166,11 +174,11 @@ function Selection(props) {
       }
     };
     fetchDinnerImages();
-  }, [mounted, fixedDinnerProduct.label]);
-
+  }, [mounted, dinnerFirstSelect.name]);
+  console.log("Snack going in API fetch: ", snackFirstSelect.name);
   useEffect(() => {
     const fetchSnackImages = async () => {
-      if (mounted) {
+      if (mounted && isSnackDataAvailable) {
         try {
           const response = await axios.get(
             `https://api.edamam.com/api/recipes/v2?type=public&q=${snackFirstSelect.name}&app_id=${APP_ID}&app_key=${APP_KEY}`
@@ -189,43 +197,45 @@ function Selection(props) {
       }
     };
     fetchSnackImages();
-  }, [mounted, fixedSnackProduct.label]);
+  }, [mounted, snackFirstSelect.name]);
 
   //make objects based on selected meals by generator
   //image will be fetched with function later
+  console.log("Breakfast on final output: ", breakfastFirstSelect.name);
   const breakfastSelect = {
-    name: fixedBreakfastProduct ? fixedBreakfastProduct.label : "skip",
+    name: breakfastFirstSelect ? breakfastFirstSelect.name : "skip",
     img:
-      fixedBreakfastProduct && fixedBreakfastProduct.label === "Skipped"
+      breakfastFirstSelect && breakfastFirstSelect.name === "Skipped"
         ? process.env.PUBLIC_URL + "/x-mark.jpg"
         : breakfast
         ? breakfast
         : "image",
   };
-
+  console.log("Lunch on final output: ", lunchFirstSelect.name);
   const lunchSelect = {
-    name: fixedLunchProduct ? fixedLunchProduct.label : "skip",
+    name: lunchFirstSelect ? lunchFirstSelect.name : "skip",
     img:
-      fixedLunchProduct && fixedLunchProduct.label === "Skipped"
+      lunchFirstSelect && lunchFirstSelect.name === "Skipped"
         ? process.env.PUBLIC_URL + "/x-mark.jpg"
         : lunch
         ? lunch
         : "image",
   };
-
+  console.log("Dinner on final output: ", dinnerFirstSelect.name);
   const dinnerSelect = {
-    name: fixedDinnerProduct ? fixedDinnerProduct.label : "skip",
+    name: dinnerFirstSelect ? dinnerFirstSelect.name : "skip",
     img:
-      fixedDinnerProduct && fixedDinnerProduct.label === "Skipped"
+      dinnerFirstSelect && dinnerFirstSelect.name === "Skipped"
         ? process.env.PUBLIC_URL + "/x-mark.jpg"
         : dinner
         ? dinner
         : "image",
   };
+  console.log("Snack on final output: ", snackFirstSelect.name);
   const snackSelect = {
-    name: fixedSnackProduct ? fixedSnackProduct.label : "skip",
+    name: snackFirstSelect ? snackFirstSelect.name : "skip",
     img:
-      fixedSnackProduct && fixedSnackProduct.label === "Skipped"
+      snackFirstSelect && snackFirstSelect.name === "Skipped"
         ? process.env.PUBLIC_URL + "/x-mark.jpg"
         : snack
         ? snack

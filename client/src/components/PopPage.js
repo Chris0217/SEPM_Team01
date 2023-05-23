@@ -6,6 +6,7 @@ import Selection from "./Selection";
 import { flushCache } from "./Memoization";
 function PopPage() {
   //우선 마지막 3-4개가 Meal Type, 나머지는 Meal Style
+  const [isReRecommendClicked, setIsReRecommendClicked] = useState(false);
   const [checkedState, setCheckedState] = useState([
     { id: 1, value: "Vegan", isChecked: false },
     { id: 2, value: "Vegetarian", isChecked: false },
@@ -102,6 +103,11 @@ function PopPage() {
     setSelectedTypeValues(selectedTypeValues);
     setSelectedValues(selectedValues);
     setShowDiv(true);
+    // Perform the submit logic here
+    console.log("Submit button clicked!");
+
+    // Trigger the click event on the "Re-recommend" button
+    handleReRecommend();
   };
 
   const [isButtonDisabled, setButtonDisabled] = useState(false);
@@ -111,7 +117,7 @@ function PopPage() {
     }
     flushCache();
     setCountRe(countRe + 1);
-    const { id } = event.target;
+    const { id } = event.target.id;
     setCheckedState((prevState) => {
       const newState = prevState.map((item) => {
         if (item.id === Number(id)) {
@@ -122,6 +128,13 @@ function PopPage() {
       return newState;
     });
     setButtonDisabled(true); // Disable the button
+    if (!isReRecommendClicked) {
+      // Perform the re-recommendation logic here
+      console.log("Re-recommend button clicked!");
+
+      // Update the state to indicate that the button has been clicked
+      setIsReRecommendClicked(true);
+    }
   }
 
   useEffect(() => {
