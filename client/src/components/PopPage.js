@@ -108,8 +108,6 @@ function PopPage() {
     setSelectedValues(selectedValues);
     setShowDiv(true);
     console.log("Submit button clicked!");
-
-    // Trigger the click event on the "Re-recommend" button due to bugs on first return
   };
 
   //function for re-recommend
