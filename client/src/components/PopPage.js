@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./PopPage.css";
 import "./Dashboard.css";
-import axios from "axios";
+import axios from "../api/axios";
 import Selection from "./Selection";
 import { flushCache } from "./Memoization";
 function PopPage() {
@@ -155,11 +155,10 @@ function PopPage() {
       window.location.href = "http://localhost:3000/home";
       //window.location.href = "http://13.215.209.159:3000/home";
       const responseInput = await axios.post(
-        "http://localhost:3500/home",
+        "/home",
         { mealUserArray, mealPlanInfo },
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
         }
       );
       console.log("Sent somehow");
