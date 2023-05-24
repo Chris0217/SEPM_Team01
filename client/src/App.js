@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/mypage" element={<MyPage />} />
             <Route exact path="/home" element={<Home />} />
-            <Route exact path="/api" element={<FetchApi />} />
+            <Route exact path="/search" element={<FetchApi />} />
             <Route exact path="/selection" element={<Selection />} />
           </Routes>
         </div>
