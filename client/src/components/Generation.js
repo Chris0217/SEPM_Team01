@@ -90,14 +90,6 @@ function Generation() {
     document.body.classList.remove("popup-open");
   }
 
-  const [countSet, setCountSet] = useState(0);
-  function setAgain() {
-    window.subSituation = 150;
-    console.log(window.subSituation);
-    setCountSet(countSet + 1);
-  }
-  console.log(window.subSituation);
-
   return (
     <>
       {window.subSituation === 150 ? (

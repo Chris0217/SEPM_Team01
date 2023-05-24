@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import MyPage from "./components/MyPage";
 import Home from "./components/Home";
-import FetchApi from "./components/FetchApi";
+import FetchApi from "./fetchAPI/FetchApi";
 import Selection from "./components/Selection";
 
 function App() {

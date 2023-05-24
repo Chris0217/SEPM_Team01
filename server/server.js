@@ -62,7 +62,15 @@ app.use("/home", require("./routes/popup"));
 app.use("/api", require("./routes/api"));
 app.use("/userhistory", require("./routes/userhistory"));
 app.use("/userinfo", require("./routes/userinfo"));
-// app.use('/logout', require('./routes/logout'));
+
+// 로그인 상태 확인 엔드포인트
+app.get("/api/check-login-status", (req, res) => {
+  // 세션에서 로그인 상태 확인
+  const isLoggedIn = req.session.isLoggedIn || false;
+
+  res.json({ isLoggedIn });
+});
+app.use("/api/logout", require("./routes/logout"));
 
 app.all("*", (req, res) => {
   res.status(404);

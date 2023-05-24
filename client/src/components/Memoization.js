@@ -1,7 +1,7 @@
 import { Creation } from "./Creation";
 
 let cachedResult = null;
-
+//function to run getMealResult just once
 export const getMealResult = (
   userMealType,
   userMealStyle,
