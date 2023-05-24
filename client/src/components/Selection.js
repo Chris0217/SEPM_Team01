@@ -10,16 +10,13 @@ const APP_KEY = "73d5699d0f6499668c30c852dcb1d442";
 
 function Selection(props) {
   //products to store database information, loading for useEffect rendering
-
   const [products, setProducts] = useState([]);
-  //const [userinfos, setUserinfos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Set the flag to true when the component is mounted
     setMounted(true);
-
     // Clean up the event listeners when the component is unmounted
     return () => {
       setMounted(false);
@@ -27,8 +24,9 @@ function Selection(props) {
   }, []);
 
   useEffect(() => {
+    //fetching data of recipe database
     const fetchData = async () => {
-      // Fetch data only if the component is mounted
+      // Fetch data only if the component is mounted, only running once.
       if (mounted) {
         try {
           const response = await axios.get("http://localhost:3500/api");
@@ -44,7 +42,7 @@ function Selection(props) {
     fetchData();
   }, [mounted]);
 
-  //this will be fetched from other js file and database on future*/
+  //User information is fetched from PopPage.js and is brought with props
   const userMealType = props.type;
   const userMealStyle = props.style;
   const totalCal = props.cal;
@@ -54,6 +52,8 @@ function Selection(props) {
   const proteinTotal = Math.round(((totalCal / 100) * 15) / 4);
   const fatTotal = Math.round(((totalCal / 100) * 35) / 9);
 
+  //Setting to make sure getMealResult runs before final output
+  //Erases error of empty values being returned
   let mealResult = Array(8).fill("");
   if (!loading) {
     mealResult = getMealResult(
@@ -69,6 +69,7 @@ function Selection(props) {
 
   console.log(mealResult);
 
+  //Meal plan created from getMealResult is fetched to print out
   const fixedBreakfastProduct = mealResult[0];
   const fixedLunchProduct = mealResult[1];
   const fixedDinnerProduct = mealResult[2];
@@ -92,18 +93,18 @@ function Selection(props) {
   const snackFirstSelect = {
     name: fixedSnackProduct ? fixedSnackProduct.label : "snack",
   };
-
+  //fetch image from api
   const isBreakfastDataAvailable = Boolean(fixedBreakfastProduct);
   const isLunchDataAvailable = Boolean(fixedLunchProduct);
   const isDinnerDataAvailable = Boolean(fixedDinnerProduct);
   const isSnackDataAvailable = Boolean(fixedSnackProduct);
 
-  //fetch image from api
   const [breakfast, setBreakfast] = useState({});
   const [lunch, setLunch] = useState({});
   const [dinner, setDinner] = useState({});
   const [snack, setSnack] = useState({});
   console.log("Breakfast going in API fetch: ", breakfastFirstSelect.name);
+  //useEffect used to avoid API called over the limit.
   useEffect(() => {
     const fetchBreakfastImages = async () => {
       // Fetch breakfast images only if the component is mounted
@@ -199,8 +200,7 @@ function Selection(props) {
     fetchSnackImages();
   }, [mounted, snackFirstSelect.name]);
 
-  //make objects based on selected meals by generator
-  //image will be fetched with function later
+  //make objects based on selected meals by generator and images fetched from API
   console.log("Breakfast on final output: ", breakfastFirstSelect.name);
   const breakfastSelect = {
     name: breakfastFirstSelect ? breakfastFirstSelect.name : "skip",
@@ -241,7 +241,7 @@ function Selection(props) {
         ? snack
         : "image",
   };
-
+  //storing inside array(mealArray & mealPlanInfo) to save on database on PopPage.js
   const mealArray = [breakfastSelect, lunchSelect, dinnerSelect, snackSelect];
   window.mealArray = mealArray;
   const mealPlanInfo = [
