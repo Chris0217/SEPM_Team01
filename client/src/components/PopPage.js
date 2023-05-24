@@ -110,7 +110,6 @@ function PopPage() {
     console.log("Submit button clicked!");
 
     // Trigger the click event on the "Re-recommend" button due to bugs on first return
-    handleReRecommend();
   };
 
   //function for re-recommend
